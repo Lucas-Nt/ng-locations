@@ -1,10 +1,16 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Ng Locations</span>
+    <!-- Logo -->
+    <a routerLink="/home">Ng Locations</a>
+    <!-- /Logo -->
 
-    <div class="navigation-buttons">
-      <button mat-button>List</button>
-      <button mat-button>Map</button>
+    <!-- Navigation items -->
+    <div class="navigation-items">
+      <a mat-button routerLink="/list" routerLinkActive="router-link-active"
+        >List</a
+      >
+      <a mat-button routerLink="/map">Map</a>
     </div>
+    <!-- /Navigation items -->
   </mat-toolbar-row>
 </mat-toolbar>

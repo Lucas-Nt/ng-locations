@@ -1,3 +1,13 @@
-:host {
-  display: block;
+$top-toolbar-height: 64px;
+$top-toolbar-navigation-buttons-margin-left: 32px;
+$top-toolbar-navigation-buttons-gap: 8px;
+
+mat-toolbar {
+  height: $top-toolbar-height;
+}
+
+.navigation-items {
+  display: flex;
+  margin-left: $top-toolbar-navigation-buttons-margin-left;
+  gap: $top-toolbar-navigation-buttons-gap;
 }
