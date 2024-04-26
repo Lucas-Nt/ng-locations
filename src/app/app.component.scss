@@ -1,0 +1,8 @@
+$navigation-buttons-margin-left: 32px;
+$navigation-buttons-gap: 8px;
+
+.navigation-buttons {
+  display: flex;
+  margin-left: $navigation-buttons-margin-left;
+  gap: $navigation-buttons-gap;
+}
