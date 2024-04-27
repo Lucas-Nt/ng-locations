@@ -1,4 +1,4 @@
-@use './common.scss' as *;
+@use './common' as *;
 
 /* Mixin for Helper Classes */
 @mixin helper-class-generator($class-name, $style-name) {

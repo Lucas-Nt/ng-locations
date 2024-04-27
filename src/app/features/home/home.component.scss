@@ -1,3 +1,46 @@
+@use '../../../assets/common';
+
+$logo-color: purple;
+$welcome-screen-help-text-color: rgb(158, 158, 158);
+
 :host {
   display: block;
+  height: calc(100% - #{common.$top-toolbar-height});
+}
+
+.home-page-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: map-get(common.$spacers, 3);
+  color: $welcome-screen-help-text-color;
+
+  h2 {
+    font-weight: normal;
+    font-weight: 300;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Righteous', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: $logo-color;
+  text-decoration: none;
+  font-size: 48px;
+  text-shadow: 0 0 5px #c9adc9;
+
+  img {
+    width: 80px;
+    margin-bottom: map-get(common.$spacers, 3);
+  }
+
+  .faded-text {
+    opacity: 0.5;
+  }
 }

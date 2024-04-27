@@ -41,7 +41,10 @@
 
         <!-- Marker tooltip -->
         <map-info-window (closeclick)="onInfoClosed()">
-          {{ activeLocationIndex }}
+          <span>
+            {{ (locations$ | async)![activeLocationIndex!]?.name }}
+            <!-- {{ locations[activeLocationIndex!].name }} -->
+          </span>
         </map-info-window>
         <!-- /Marker tooltip -->
       </google-map>

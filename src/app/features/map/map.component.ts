@@ -213,10 +213,10 @@ export class MapComponent implements OnInit {
 
   // TODO: add types
   locations$!: Observable<any[]>;
-  activeLocationIndex: number | null = null;
+  activeLocationIndex!: number | null;
 
   readonly defaultMarkerIcon =
-    'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+    'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
   readonly activeMarkerIcon =
     'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
   readonly locationsResource = inject(LocationsResource);

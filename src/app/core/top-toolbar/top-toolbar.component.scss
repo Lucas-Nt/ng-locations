@@ -1,10 +1,31 @@
-@use '../../../assets/common.scss' as common;
+@use '../../../assets/common';
 
+$logo-color: #ffff;
 $top-toolbar-navigation-buttons-margin-left: map-get(common.$spacers, 4);
 $top-toolbar-navigation-buttons-gap: map-get(common.$spacers, 1);
 
 mat-toolbar {
   height: common.$top-toolbar-height;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Righteous', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: $logo-color;
+    text-decoration: none;
+    font-size: 24px;
+
+    img {
+      width: 18px;
+      margin-right: map-get(common.$spacers, 1);
+    }
+
+    .faded-text {
+      opacity: 0.5;
+    }
+  }
 }
 
 .navigation-items {
