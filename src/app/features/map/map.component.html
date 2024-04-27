@@ -11,7 +11,7 @@
           type="button"
           mat-mini-fab
           color="primary"
-          (click)="closeDrawerAndResetActiveIndex()"
+          (click)="closeDrawerAndTooltip()"
         >
           <mat-icon fontIcon="close" aria-label="Close side content" />
         </button>
@@ -55,7 +55,7 @@
         <!-- /Markers -->
 
         <!-- Marker tooltip -->
-        <map-info-window (closeclick)="closeDrawerAndResetActiveIndex()">
+        <map-info-window (closeclick)="closeDrawerAndTooltip()">
           <span>{{ locations[activeLocationIndex!]?.name }}</span>
         </map-info-window>
         <!-- /Marker tooltip -->

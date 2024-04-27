@@ -20,7 +20,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GetAllLocations } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
@@ -225,7 +225,7 @@ export class MapComponent implements OnInit {
   readonly originalOrder = (): number => 0;
   activeLocationIndex!: number | null;
   // TODO: add types
-  @Select(AppSelectors.locations) locations$!: Observable<any[]>;
+  locations$!: Observable<any[]>;
 
   readonly defaultMarkerIcon =
     'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
@@ -237,6 +237,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new GetAllLocations());
+    this.locations$ = this.store.select(AppSelectors.locations);
   }
 
   markerClicked(marker: MapMarker, index: number) {
@@ -245,8 +246,9 @@ export class MapComponent implements OnInit {
     this.infoWindow?.open(marker);
   }
 
-  closeDrawerAndResetActiveIndex() {
+  closeDrawerAndTooltip() {
     this.activeLocationIndex = null;
     this.drawer.close();
+    this.infoWindow?.close();
   }
 }
