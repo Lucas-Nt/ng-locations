@@ -3,9 +3,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  ViewChild,
   inject,
 } from '@angular/core';
-import { GoogleMapsModule, MapMarker } from '@angular/google-maps';
+import {
+  GoogleMapsModule,
+  MapInfoWindow,
+  MapMarker,
+} from '@angular/google-maps';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { Observable, map } from 'rxjs';
 import { LocationsResource } from '../../shared/services/locations.resource';
 
@@ -20,12 +28,22 @@ const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [GoogleMapsModule, AsyncPipe, NgFor],
+  imports: [
+    GoogleMapsModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    AsyncPipe,
+    NgFor,
+  ],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit {
+  @ViewChild('drawer') drawer!: MatDrawer;
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+
   // TODO: move options to service
   readonly mapOptions: google.maps.MapOptions = {
     center: { ...DEFAULT_MAP_CENTER },
@@ -211,6 +229,12 @@ export class MapComponent implements OnInit {
 
   markerClicked(marker: MapMarker, index: number) {
     this.activeLocationIndex = index;
+    this.drawer.open();
+    this.infoWindow?.open(marker);
+  }
+
+  onInfoClosed() {
+    this.activeLocationIndex = null;
   }
 
   // TODO: move this to a mapper

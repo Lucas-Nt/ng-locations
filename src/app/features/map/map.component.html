@@ -1,19 +1,52 @@
 <div class="google-map-container">
-  <!-- Map -->
-  <google-map height="100%" width="100%" [zoom]="5" [options]="mapOptions">
-    <!-- Markers -->
-    @for (location of locations$ | async; track $index) {
-    <map-marker
-      #marker="mapMarker"
-      *ngFor="let location of locations$ | async; let idx = index"
-      [position]="location.position"
-      [icon]="
-        idx === this.activeLocationIndex ? activeMarkerIcon : defaultMarkerIcon
-      "
-      (mapClick)="markerClicked(marker, idx)"
-    />
-    }
-    <!-- /Markers -->
-  </google-map>
-  <!-- /Map -->
+  <mat-drawer-container class="drawer-container" autosize #drawer>
+    <!-- Side content -->
+    <mat-drawer #drawer class="side-content" mode="side">
+      <div class="header">
+        <h2>Location information</h2>
+
+        <!-- Close button -->
+        <button
+          type="button"
+          mat-mini-fab
+          color="primary"
+          (click)="drawer.close()"
+        >
+          <mat-icon fontIcon="close" aria-label="Close side content" />
+        </button>
+        <!-- /Close button -->
+      </div>
+    </mat-drawer>
+    <!-- /Side content -->
+
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Map -->
+      <google-map height="100%" width="100%" [zoom]="5" [options]="mapOptions">
+        <!-- Markers -->
+        @for (location of locations$ | async; track $index) {
+        <map-marker
+          #marker="mapMarker"
+          *ngFor="let location of locations$ | async; let idx = index"
+          [position]="location.position"
+          [icon]="
+            idx === this.activeLocationIndex
+              ? activeMarkerIcon
+              : defaultMarkerIcon
+          "
+          (mapClick)="markerClicked(marker, idx)"
+        />
+        }
+        <!-- /Markers -->
+
+        <!-- Marker tooltip -->
+        <map-info-window (closeclick)="onInfoClosed()">
+          {{ activeLocationIndex }}
+        </map-info-window>
+        <!-- /Marker tooltip -->
+      </google-map>
+      <!-- /Map -->
+    </div>
+    <!-- /Main content -->
+  </mat-drawer-container>
 </div>

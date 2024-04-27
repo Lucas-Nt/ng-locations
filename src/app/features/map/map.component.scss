@@ -1,4 +1,6 @@
-@use '../../../assets/common.scss';
+@use '../../../assets/common';
+
+$map-side-content-width: 380px;
 
 :host {
   display: block;
@@ -10,7 +12,34 @@
 
   google-map {
     display: block;
-    height: inherit;
-    width: inherit;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.drawer-container {
+  width: inherit;
+  height: inherit;
+}
+
+.main-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-content {
+  min-width: $map-side-content-width;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: map-get(common.$spacers, 2) map-get(common.$spacers, 3);
+    align-items: center;
+
+    h2 {
+      margin-bottom: 0;
+    }
   }
 }
