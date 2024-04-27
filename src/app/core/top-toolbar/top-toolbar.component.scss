@@ -1,9 +1,10 @@
-$top-toolbar-height: 64px;
-$top-toolbar-navigation-buttons-margin-left: 32px;
-$top-toolbar-navigation-buttons-gap: 8px;
+@use '../../../assets/common.scss' as common;
+
+$top-toolbar-navigation-buttons-margin-left: map-get(common.$spacers, 4);
+$top-toolbar-navigation-buttons-gap: map-get(common.$spacers, 1);
 
 mat-toolbar {
-  height: $top-toolbar-height;
+  height: common.$top-toolbar-height;
 }
 
 .navigation-items {

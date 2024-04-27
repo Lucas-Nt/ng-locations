@@ -1,0 +1,38 @@
+@use './common.scss' as *;
+
+/* Mixin for Helper Classes */
+@mixin helper-class-generator($class-name, $style-name) {
+  @each $key, $value in $spacers {
+    $class: #{$class-name + $key};
+    #{$class} {
+      #{$style-name}: map-get($spacers, $key) !important;
+    }
+  }
+}
+
+/* Paddings */
+@include helper-class-generator('.pt-', 'padding-top');
+@include helper-class-generator('.pr-', 'padding-right');
+@include helper-class-generator('.pb-', 'padding-bottom');
+@include helper-class-generator('.pl-', 'padding-left');
+@include helper-class-generator('.p-', 'padding');
+
+/*  Margins */
+@include helper-class-generator('.mt-', 'margin-top');
+@include helper-class-generator('.mr-', 'margin-right');
+@include helper-class-generator('.mb-', 'margin-bottom');
+@include helper-class-generator('.ml-', 'margin-left');
+@include helper-class-generator('.m-', 'margin');
+
+/* Flex layout helpers */
+.d-flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
