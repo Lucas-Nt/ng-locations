@@ -1,4 +1,19 @@
 <div class="google-map-container">
+  <!-- Map -->
   <google-map height="100%" width="100%" [zoom]="5" [options]="mapOptions">
+    <!-- Markers -->
+    @for (location of locations$ | async; track $index) {
+    <map-marker
+      #marker="mapMarker"
+      *ngFor="let location of locations$ | async; let idx = index"
+      [position]="location.position"
+      [icon]="
+        idx === this.activeLocationIndex ? activeMarkerIcon : defaultMarkerIcon
+      "
+      (mapClick)="markerClicked(marker, idx)"
+    />
+    }
+    <!-- /Markers -->
   </google-map>
+  <!-- /Map -->
 </div>

@@ -1,22 +1,34 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { AsyncPipe, NgFor } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { GoogleMapsModule, MapMarker } from '@angular/google-maps';
+import { Observable, map } from 'rxjs';
+import { LocationsResource } from '../../shared/services/locations.resource';
 
-const EUROPE_MIDPOINT_POSITION = {
-  lat: 54.526,
-  lng: 15.2551,
+// TODO: move constants to service
+/* Cyprus coordinates */
+const CYPRUS_COORDINATES = {
+  lat: 35.1264,
+  lng: 33.4299,
 };
+const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [GoogleMapsModule],
+  imports: [GoogleMapsModule, AsyncPipe, NgFor],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
+  // TODO: move options to service
   readonly mapOptions: google.maps.MapOptions = {
-    center: { ...EUROPE_MIDPOINT_POSITION },
+    center: { ...DEFAULT_MAP_CENTER },
     maxZoom: 15,
     minZoom: 3,
     styles: [
@@ -180,4 +192,35 @@ export class MapComponent {
       },
     ],
   };
+
+  // TODO: add types
+  locations$!: Observable<any[]>;
+  activeLocationIndex: number | null = null;
+
+  readonly defaultMarkerIcon =
+    'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+  readonly activeMarkerIcon =
+    'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+  readonly locationsResource = inject(LocationsResource);
+
+  ngOnInit(): void {
+    this.locations$ = this.locationsResource
+      .getLocations()
+      .pipe(map((locations) => locations.map(this.toLocationViewModel)));
+  }
+
+  markerClicked(marker: MapMarker, index: number) {
+    this.activeLocationIndex = index;
+  }
+
+  // TODO: move this to a mapper
+  private toLocationViewModel(location: any) {
+    return {
+      name: location.name,
+      position: {
+        lat: location.coordinates[0],
+        lng: location.coordinates[1],
+      },
+    };
+  }
 }
