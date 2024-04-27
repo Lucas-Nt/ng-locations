@@ -4,7 +4,7 @@
     <h1>Locations list</h1>
 
     <!-- Add new button -->
-    <button mat-flat-button color="primary">
+    <button mat-flat-button color="primary" (click)="openDialog()">
       <mat-icon>add</mat-icon>Add new
     </button>
     <!-- /Add new button -->
@@ -28,7 +28,7 @@
       <ng-container matColumnDef="address">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
         <td mat-cell *matCellDef="let location">
-          {{ location.address ? location.address : '-' }}
+          {{ location.address | formatValue }}
         </td>
       </ng-container>
       <!-- /Address Column -->
@@ -51,7 +51,7 @@
       <ng-container matColumnDef="creationDate">
         <th mat-header-cell *matHeaderCellDef>creationDate</th>
         <td mat-cell *matCellDef="let location">
-          {{ location.creationDate ? location.creationDate : '-' }}
+          {{ location.creationDate | formatValue }}
         </td>
       </ng-container>
       <!-- /Creation Date Column -->
@@ -65,7 +65,7 @@
               class="edit-row-button"
               mat-icon-button
               color="primary"
-              (click)="editLocation(location)"
+              (click)="openDialog(location)"
             >
               <mat-icon>edit</mat-icon>
             </button>

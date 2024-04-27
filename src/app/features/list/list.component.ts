@@ -6,17 +6,22 @@ import {
   inject,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, filter, take, tap } from 'rxjs';
 import {
+  CreateLocation,
   GetAllLocations,
   SetLocationListOptions,
+  UpdateLocation,
 } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
+import { FormatValuePipe } from '../../shared/pipes/format-value.pipe';
+import { LocationPopupFormComponent } from './location-popup-form/location-popup-form.component';
 
 @Component({
   selector: 'app-list',
@@ -31,6 +36,7 @@ import { AppSelectors } from '../../core/store/app.selectors';
     MatButtonModule,
     MatIconModule,
     MatSortModule,
+    FormatValuePipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,6 +59,7 @@ export class ListComponent implements OnInit {
   locationsBasedOnOptions$!: Observable<any[]>;
 
   private readonly store = inject(Store);
+  private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.store.dispatch(new GetAllLocations());
@@ -75,8 +82,28 @@ export class ListComponent implements OnInit {
     this.setLocationListOptions();
   }
 
-  editLocation(location: any) {
+  openDialog(location: any = {}) {
     console.log('Edit location', location);
+
+    const dialogRef = this.dialog.open(LocationPopupFormComponent, {
+      data: location,
+      width: '40%',
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter(Boolean),
+        tap((data) => {
+          if (data.id) {
+            this.store.dispatch(new UpdateLocation(data));
+          } else {
+            this.store.dispatch(new CreateLocation(data));
+          }
+        })
+      )
+      .subscribe();
   }
 
   private setLocationListOptions() {

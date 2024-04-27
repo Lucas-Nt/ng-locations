@@ -3,7 +3,12 @@ import { Sort } from '@angular/material/sort';
 import { Action, State, StateContext } from '@ngxs/store';
 import { Observable, iif, map, of, tap } from 'rxjs';
 import { LocationsResource } from './../../shared/services/locations.resource';
-import { GetAllLocations, SetLocationListOptions } from './app.actions';
+import {
+  CreateLocation,
+  GetAllLocations,
+  SetLocationListOptions,
+  UpdateLocation,
+} from './app.actions';
 
 export interface ListOptionsModel {
   currentPage: number;
@@ -77,8 +82,41 @@ export class AppState {
     });
   }
 
+  @Action(CreateLocation)
+  createLocation(ctx: StateContext<AppStateModel>, action: { location: any }) {
+    const state = ctx.getState();
+    const newLocation = {
+      ...action.location,
+      creationDate: new Date(),
+      id: crypto.randomUUID(),
+    };
+
+    ctx.patchState({
+      ...state,
+      locations: [...state.locations, newLocation],
+    });
+  }
+
+  @Action(UpdateLocation)
+  updateLocation(ctx: StateContext<AppStateModel>, action: { location: any }) {
+    const state = ctx.getState();
+    const updatedLocation = {
+      ...action.location,
+    };
+
+    const updatedLocations = state.locations.map((location) =>
+      location.id === updatedLocation.id ? updatedLocation : location
+    );
+
+    ctx.patchState({
+      ...state,
+      locations: updatedLocations,
+    });
+  }
+
   private toLocationViewModel(location: any) {
     return {
+      id: crypto.randomUUID(),
       name: location.name,
       address: location.address,
       lat: location.coordinates[0],

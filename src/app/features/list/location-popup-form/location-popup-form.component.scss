@@ -1,0 +1,31 @@
+@use '../../../../assets/common' as *;
+
+:host {
+  display: block;
+}
+
+.location-popup-form-container {
+  padding: map-get($spacers, 2) map-get($spacers, 3);
+
+  .header {
+    h1 {
+      color: $app-theme-color;
+    }
+  }
+
+  .content {
+    form {
+      margin-top: map-get($spacers, 4);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: map-get($spacers, 2);
+    }
+  }
+
+  .footer {
+    margin-top: map-get($spacers, 3);
+    display: flex;
+    justify-content: end;
+    gap: map-get($spacers, 2);
+  }
+}

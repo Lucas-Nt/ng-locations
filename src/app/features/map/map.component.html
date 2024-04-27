@@ -23,9 +23,9 @@
         <!-- Active location info -->
         @for (prop of locations[activeLocationIndex!] | keyvalue: originalOrder;
         track $index) {
-        <div class="location-info-row">
+        <div *ngIf="prop.key !== 'id'" class="location-info-row">
           <div class="key">{{ prop.key }}:</div>
-          <div class="value">{{ prop.value ? prop.value : '-' }}</div>
+          <div class="value">{{ prop.value | formatValue }}</div>
         </div>
         }
         <!-- Active location info -->

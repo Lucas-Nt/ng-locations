@@ -1,10 +1,4 @@
-import {
-  AsyncPipe,
-  JsonPipe,
-  KeyValuePipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe, KeyValuePipe, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -24,6 +18,7 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GetAllLocations } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
+import { FormatValuePipe } from '../../shared/pipes/format-value.pipe';
 import { LocationsResource } from '../../shared/services/locations.resource';
 
 // TODO: move constants to service
@@ -46,7 +41,7 @@ const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
     NgFor,
     NgIf,
     KeyValuePipe,
-    JsonPipe, // TODO: added for debugging, remove
+    FormatValuePipe,
   ],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
