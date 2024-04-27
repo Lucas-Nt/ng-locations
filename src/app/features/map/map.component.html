@@ -20,7 +20,15 @@
 
       <!-- Content -->
       <div class="content">
-        <pre>{{ locations[activeLocationIndex!] | json }}</pre>
+        <!-- Active location info -->
+        @for (prop of locations[activeLocationIndex!] | keyvalue: originalOrder;
+        track $index) {
+        <div class="location-info-row">
+          <div class="key">{{ prop.key }}:</div>
+          <div class="value">{{ prop.value ? prop.value : '-' }}</div>
+        </div>
+        }
+        <!-- Active location info -->
       </div>
 
       <!-- /Content -->
@@ -35,7 +43,7 @@
         @for (location of locations; track idx; let idx = $index) {
         <map-marker
           #marker="mapMarker"
-          [position]="location.position"
+          [position]="{ lat: location.lat, lng: location.lng }"
           [icon]="
             idx === this.activeLocationIndex
               ? activeMarkerIcon

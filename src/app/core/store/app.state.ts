@@ -40,10 +40,8 @@ export class AppState {
     return {
       name: location.name,
       address: location.address,
-      position: {
-        lat: location.coordinates[0],
-        lng: location.coordinates[1],
-      },
+      lat: location.coordinates[0],
+      lng: location.coordinates[1],
       creationDate: location.creationDate,
     };
   }

@@ -1,4 +1,4 @@
-@use '../../../assets/common';
+@use '../../../assets/common' as *;
 
 $map-side-content-width: 380px;
 
@@ -7,7 +7,7 @@ $map-side-content-width: 380px;
 }
 
 .google-map-container {
-  height: calc(100vh - #{common.$top-toolbar-height});
+  height: calc(100vh - #{$top-toolbar-height});
   width: 100vw;
 
   google-map {
@@ -35,11 +35,27 @@ $map-side-content-width: 380px;
   .header {
     display: flex;
     justify-content: space-between;
-    padding: map-get(common.$spacers, 2) map-get(common.$spacers, 3);
+    padding: map-get($spacers, 2) map-get($spacers, 3);
     align-items: center;
 
     h2 {
       margin-bottom: 0;
+    }
+  }
+
+  .content {
+    padding: 0 map-get($spacers, 3);
+    margin-top: map-get($spacers, 4);
+
+    .location-info-row {
+      display: flex;
+      gap: map-get($spacers, 1);
+      font-size: map-get($spacers, 2);
+      margin-bottom: map-get($spacers, 2);
+
+      .key {
+        color: $app-theme-color;
+      }
     }
   }
 }

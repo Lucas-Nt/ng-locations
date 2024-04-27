@@ -1,4 +1,10 @@
-import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
+import {
+  AsyncPipe,
+  JsonPipe,
+  KeyValuePipe,
+  NgFor,
+  NgIf,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,6 +45,7 @@ const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
     AsyncPipe,
     NgFor,
     NgIf,
+    KeyValuePipe,
     JsonPipe, // TODO: added for debugging, remove
   ],
   templateUrl: './map.component.html',
@@ -215,7 +222,7 @@ export class MapComponent implements OnInit {
       },
     ],
   };
-
+  readonly originalOrder = (): number => 0;
   activeLocationIndex!: number | null;
   // TODO: add types
   @Select(AppSelectors.locations) locations$!: Observable<any[]>;
