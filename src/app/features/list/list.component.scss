@@ -1,3 +1,61 @@
+@use '../../../assets/common' as *;
+
+$list-header-height: 60px;
+$list-paginator-height: 56px;
+$list-header-vertical-margin: map-get($spacers, 2);
+$list-pagination-vertical-margin: map-get($spacers, 2);
+
 :host {
   display: block;
+}
+
+.list-container {
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $list-header-height;
+    margin: map-get($spacers, 2) 0;
+
+    h1 {
+      color: $app-theme-color;
+      margin-bottom: 0;
+    }
+  }
+
+  .table-wrapper {
+    $reserved-page-height: $top-toolbar-height + $list-header-height +
+      $list-paginator-height + ($list-header-vertical-margin * 2) +
+      ($list-pagination-vertical-margin * 2);
+
+    height: calc(100vh - #{$reserved-page-height});
+    overflow-y: auto;
+
+    .button-wrapper {
+      min-width: 60px;
+      display: flex;
+      justify-content: end;
+
+      .edit-row-button {
+        display: none;
+      }
+    }
+
+    tr:hover {
+      .edit-row-button {
+        display: block;
+      }
+    }
+  }
+}
+
+.paginator {
+  height: $list-paginator-height;
+  margin: map-get($spacers, 2) 0;
 }

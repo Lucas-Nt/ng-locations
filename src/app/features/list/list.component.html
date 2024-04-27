@@ -1,1 +1,96 @@
-list component
+@if (allLocations$ | async; as allLocations) {
+<div class="list-container">
+  <div class="list-header">
+    <h1>Locations list</h1>
+
+    <!-- Add new button -->
+    <button mat-flat-button color="primary">
+      <mat-icon>add</mat-icon>Add new
+    </button>
+    <!-- /Add new button -->
+  </div>
+  <div class="table-wrapper">
+    <table
+      mat-table
+      matSort
+      class="table-with-sticky-header"
+      [dataSource]="(locationsBasedOnOptions$ | async)!"
+      (matSortChange)="sortingChanged($event)"
+    >
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let location">{{ location.name }}</td>
+      </ng-container>
+      <!-- /Name Column -->
+
+      <!-- Address Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let location">
+          {{ location.address ? location.address : '-' }}
+        </td>
+      </ng-container>
+      <!-- /Address Column -->
+
+      <!-- Lat Column -->
+      <ng-container matColumnDef="lat">
+        <th mat-header-cell *matHeaderCellDef>lat</th>
+        <td mat-cell *matCellDef="let location">{{ location.lat }}</td>
+      </ng-container>
+      <!-- /Lat Column -->
+
+      <!-- Long Column -->
+      <ng-container matColumnDef="lng">
+        <th mat-header-cell *matHeaderCellDef>lng</th>
+        <td mat-cell *matCellDef="let location">{{ location.lng }}</td>
+      </ng-container>
+      <!-- /Long Column -->
+
+      <!-- Creation Date Column -->
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef>creationDate</th>
+        <td mat-cell *matCellDef="let location">
+          {{ location.creationDate ? location.creationDate : '-' }}
+        </td>
+      </ng-container>
+      <!-- /Creation Date Column -->
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let location">
+          <div class="button-wrapper">
+            <button
+              class="edit-row-button"
+              mat-icon-button
+              color="primary"
+              (click)="editLocation(location)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      <!-- /Action Column -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator
+    class="paginator"
+    showFirstLastButtons
+    [length]="allLocations.length"
+    [pageIndex]="currentPage"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizes"
+    (page)="pageChanged($event)"
+  >
+  </mat-paginator>
+  <!-- /Pagination -->
+</div>
+
+}

@@ -41,3 +41,13 @@
 .router-link-active {
   background-color: lighten($app-theme-color, 10) !important;
 }
+
+.table-with-sticky-header {
+  thead {
+    tr {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+  }
+}
