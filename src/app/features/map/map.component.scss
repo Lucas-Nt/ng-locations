@@ -1,3 +1,16 @@
+@use '../../../assets/common.scss';
+
 :host {
   display: block;
+}
+
+.google-map-container {
+  height: calc(100vh - #{common.$top-toolbar-height});
+  width: 100vw;
+
+  google-map {
+    display: block;
+    height: inherit;
+    width: inherit;
+  }
 }
