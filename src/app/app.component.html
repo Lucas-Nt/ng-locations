@@ -1,2 +1,9 @@
-<app-top-toolbar />
+<!-- Top toolbar -->
+<app-top-toolbar
+  [availableLanguages]="availableLanguages"
+  [activeLanguage]="activeLanguage"
+  (languageChanged)="setActiveLanguage($event)"
+/>
+<!-- /Top toolbar -->
+
 <router-outlet />

@@ -1,21 +1,45 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <!-- Logo -->
-    <a routerLink="/home" class="logo">
-      <img src="assets/icons/marker.png" alt="marker" />
-      Location<span class="faded-text">Xplorer</span>
-    </a>
-    <!-- /Logo -->
+<ng-container *transloco="let t">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <!-- Logo -->
+      <a routerLink="/home" class="logo">
+        <img src="assets/icons/marker.png" alt="marker" />
+        Location<span class="faded-text">Xplorer</span>
+      </a>
+      <!-- /Logo -->
 
-    <!-- Navigation items -->
-    <div class="navigation-items">
-      <a mat-button routerLink="/list" routerLinkActive="router-link-active"
-        >List</a
-      >
-      <a mat-button routerLink="/map" routerLinkActive="router-link-active"
-        >Map</a
-      >
-    </div>
-    <!-- /Navigation items -->
-  </mat-toolbar-row>
-</mat-toolbar>
+      <!-- Navigation items -->
+      <div class="navigation-items">
+        <a
+          mat-button
+          routerLink="/list"
+          routerLinkActive="router-link-active"
+          >{{ t('menuItems.list') }}</a
+        >
+        <a mat-button routerLink="/map" routerLinkActive="router-link-active">{{
+          t('menuItems.map')
+        }}</a>
+      </div>
+      <!-- /Navigation items -->
+
+      <!-- Language selector -->
+      <div class="language-selector">
+        <a mat-icon-button [matMenuTriggerFor]="menu">
+          <!-- load and concat dynamically path of flag inside image -->
+          <img
+            [src]="'assets/flags/' + activeLanguage + '.png'"
+            alt="flag"
+            class="flag"
+          />
+        </a>
+        <mat-menu #menu="matMenu">
+          @for (language of availableLanguages; track $index) {
+          <button mat-menu-item (click)="languageSelected(language)">
+            {{ language }}
+          </button>
+          }
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</ng-container>
