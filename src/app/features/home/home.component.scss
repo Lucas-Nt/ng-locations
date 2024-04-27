@@ -1,7 +1,5 @@
 @use '../../../assets/common';
 
-// TODO: check color
-$logo-color: purple;
 $welcome-screen-help-text-color: rgb(158, 158, 158);
 
 :host {
@@ -27,7 +25,7 @@ $welcome-screen-help-text-color: rgb(158, 158, 158);
       font-family: 'Righteous', sans-serif;
       font-weight: 400;
       font-style: normal;
-      color: $logo-color;
+      color: common.$app-theme-color;
       font-size: 48px;
       text-shadow: 0 0 5px #c9adc9;
       margin-bottom: 0;

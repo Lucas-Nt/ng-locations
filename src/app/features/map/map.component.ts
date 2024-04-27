@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +14,10 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
-import { Observable, map } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { GetAllLocations } from '../../core/store/app.actions';
+import { AppSelectors } from '../../core/store/app.selectors';
 import { LocationsResource } from '../../shared/services/locations.resource';
 
 // TODO: move constants to service
@@ -35,6 +38,8 @@ const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
     MatIconModule,
     AsyncPipe,
     NgFor,
+    NgIf,
+    JsonPipe, // TODO: added for debugging, remove
   ],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
@@ -211,9 +216,9 @@ export class MapComponent implements OnInit {
     ],
   };
 
-  // TODO: add types
-  locations$!: Observable<any[]>;
   activeLocationIndex!: number | null;
+  // TODO: add types
+  @Select(AppSelectors.locations) locations$!: Observable<any[]>;
 
   readonly defaultMarkerIcon =
     'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
@@ -221,10 +226,10 @@ export class MapComponent implements OnInit {
     'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
   readonly locationsResource = inject(LocationsResource);
 
+  private readonly store = inject(Store);
+
   ngOnInit(): void {
-    this.locations$ = this.locationsResource
-      .getLocations()
-      .pipe(map((locations) => locations.map(this.toLocationViewModel)));
+    this.store.dispatch(new GetAllLocations());
   }
 
   markerClicked(marker: MapMarker, index: number) {
@@ -233,18 +238,8 @@ export class MapComponent implements OnInit {
     this.infoWindow?.open(marker);
   }
 
-  onInfoClosed() {
+  closeDrawerAndResetActiveIndex() {
     this.activeLocationIndex = null;
-  }
-
-  // TODO: move this to a mapper
-  private toLocationViewModel(location: any) {
-    return {
-      name: location.name,
-      position: {
-        lat: location.coordinates[0],
-        lng: location.coordinates[1],
-      },
-    };
+    this.drawer.close();
   }
 }

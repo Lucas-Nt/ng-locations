@@ -1,3 +1,4 @@
+@if (locations$ | async; as locations) {
 <div class="google-map-container">
   <mat-drawer-container class="drawer-container" autosize #drawer>
     <!-- Side content -->
@@ -10,12 +11,19 @@
           type="button"
           mat-mini-fab
           color="primary"
-          (click)="drawer.close()"
+          (click)="closeDrawerAndResetActiveIndex()"
         >
           <mat-icon fontIcon="close" aria-label="Close side content" />
         </button>
         <!-- /Close button -->
       </div>
+
+      <!-- Content -->
+      <div class="content">
+        <pre>{{ locations[activeLocationIndex!] | json }}</pre>
+      </div>
+
+      <!-- /Content -->
     </mat-drawer>
     <!-- /Side content -->
 
@@ -24,10 +32,9 @@
       <!-- Map -->
       <google-map height="100%" width="100%" [zoom]="5" [options]="mapOptions">
         <!-- Markers -->
-        @for (location of locations$ | async; track $index) {
+        @for (location of locations; track idx; let idx = $index) {
         <map-marker
           #marker="mapMarker"
-          *ngFor="let location of locations$ | async; let idx = index"
           [position]="location.position"
           [icon]="
             idx === this.activeLocationIndex
@@ -40,11 +47,8 @@
         <!-- /Markers -->
 
         <!-- Marker tooltip -->
-        <map-info-window (closeclick)="onInfoClosed()">
-          <span>
-            {{ (locations$ | async)![activeLocationIndex!]?.name }}
-            <!-- {{ locations[activeLocationIndex!].name }} -->
-          </span>
+        <map-info-window (closeclick)="closeDrawerAndResetActiveIndex()">
+          <span>{{ locations[activeLocationIndex!]?.name }}</span>
         </map-info-window>
         <!-- /Marker tooltip -->
       </google-map>
@@ -53,3 +57,4 @@
     <!-- /Main content -->
   </mat-drawer-container>
 </div>
+}

@@ -36,3 +36,8 @@
 .justify-center {
   justify-content: center;
 }
+
+/* Other */
+.router-link-active {
+  background-color: lighten($app-theme-color, 10) !important;
+}
