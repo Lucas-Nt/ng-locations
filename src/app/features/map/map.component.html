@@ -39,20 +39,24 @@
     <div class="main-content">
       <!-- Map -->
       <google-map height="100%" width="100%" [zoom]="5" [options]="mapOptions">
-        <!-- Markers -->
-        @for (location of locations; track idx; let idx = $index) {
-        <map-marker
-          #marker="mapMarker"
-          [position]="{ lat: location.lat, lng: location.lng }"
-          [icon]="
-            idx === this.activeLocationIndex
-              ? activeMarkerIcon
-              : defaultMarkerIcon
-          "
-          (mapClick)="markerClicked(marker, idx)"
-        />
-        }
-        <!-- /Markers -->
+        <!-- Marker clusterer -->
+        <map-marker-clusterer [imagePath]="clusterImagePath">
+          <!-- Markers -->
+          @for (location of locations; track idx; let idx = $index) {
+          <map-marker
+            #marker="mapMarker"
+            [position]="{ lat: location.lat, lng: location.lng }"
+            [icon]="
+              idx === this.activeLocationIndex
+                ? activeMarkerIcon
+                : defaultMarkerIcon
+            "
+            (mapClick)="markerClicked(marker, idx)"
+          />
+          }
+          <!-- /Markers -->
+        </map-marker-clusterer>
+        <!-- /Marker clusterer -->
 
         <!-- Marker tooltip -->
         <map-info-window (closeclick)="closeDrawerAndTooltip()">

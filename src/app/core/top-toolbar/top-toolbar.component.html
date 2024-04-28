@@ -10,27 +10,27 @@
 
       <!-- Navigation items -->
       <div class="navigation-items">
+        <!-- Map -->
+        <a mat-button routerLink="/map" routerLinkActive="router-link-active">{{
+          t('menuItems.map')
+        }}</a>
+        <!-- /Map -->
+
+        <!-- List -->
         <a
           mat-button
           routerLink="/list"
           routerLinkActive="router-link-active"
           >{{ t('menuItems.list') }}</a
         >
-        <a mat-button routerLink="/map" routerLinkActive="router-link-active">{{
-          t('menuItems.map')
-        }}</a>
+        <!-- /List -->
       </div>
       <!-- /Navigation items -->
 
       <!-- Language selector -->
       <div class="language-selector">
         <a mat-icon-button [matMenuTriggerFor]="menu">
-          <!-- load and concat dynamically path of flag inside image -->
-          <img
-            [src]="'assets/flags/' + activeLanguage + '.png'"
-            alt="flag"
-            class="flag"
-          />
+          <img [src]="'assets/flags/' + activeLanguage + '.png'" alt="flag" />
         </a>
         <mat-menu #menu="matMenu">
           @for (language of availableLanguages; track $index) {
@@ -40,6 +40,7 @@
           }
         </mat-menu>
       </div>
+      <!-- Language selector -->
     </mat-toolbar-row>
   </mat-toolbar>
 </ng-container>

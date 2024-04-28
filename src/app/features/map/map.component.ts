@@ -51,6 +51,8 @@ export class MapComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
 
+  readonly clusterImagePath =
+    'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m';
   // TODO: move options to service
   readonly mapOptions: google.maps.MapOptions = {
     center: { ...DEFAULT_MAP_CENTER },
