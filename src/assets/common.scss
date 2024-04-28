@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 $spacers: (
   0: 0,
   1: 8px,
@@ -10,4 +12,6 @@ $spacers: (
 );
 
 $top-toolbar-height: 64px;
-$app-theme-color: #673ab7;
+$primary-palette: mat.define-palette(mat.$deep-purple-palette);
+$primary-palette-color: mat.get-color-from-palette($primary-palette, 500);
+$app-theme-color: $primary-palette-color;

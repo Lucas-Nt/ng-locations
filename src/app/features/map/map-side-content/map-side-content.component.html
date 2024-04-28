@@ -1,0 +1,68 @@
+<ng-container *transloco="let t">
+  <!-- Header -->
+  <div class="header">
+    <h2>Location information</h2>
+
+    <!-- Close button -->
+    <button
+      type="button"
+      mat-mini-fab
+      color="primary"
+      (click)="closeButtonClick.emit()"
+    >
+      <mat-icon fontIcon="close" aria-label="Close side content" />
+    </button>
+    <!-- /Close button -->
+  </div>
+  <!-- Header -->
+
+  <!-- Content -->
+  @if (location) {
+  <div class="content">
+    <!-- Name -->
+    <div class="location-info-row">
+      <div class="label">Name</div>
+      <div class="value">{{ location.name | formatValue }}</div>
+    </div>
+    <!-- /Name  -->
+
+    <!-- Address -->
+    <div class="location-info-row">
+      <div class="label">Address</div>
+      <div class="value">{{ location.address | formatValue }}</div>
+    </div>
+    <!-- /Address  -->
+
+    <!-- Lat -->
+    <div class="location-info-row">
+      <div class="label">Lat</div>
+      <div class="value">{{ location.lat | formatValue }}</div>
+    </div>
+    <!-- /Lat  -->
+
+    <!-- Long -->
+    <div class="location-info-row">
+      <div class="label">Long</div>
+      <div class="value">{{ location.lng | formatValue }}</div>
+    </div>
+    <!-- /Long  -->
+
+    <!-- Creation Date -->
+    <div class="location-info-row">
+      <div class="label">Creation Date</div>
+      <div class="value">
+        {{
+          location.creationDate
+            ? (location.creationDate | date : 'dd/MM/yyyy')
+            : '-'
+        }}
+      </div>
+    </div>
+    <!-- /Creation Date  -->
+
+    <!-- Active location info -->
+  </div>
+  }
+
+  <!-- /Content -->
+</ng-container>

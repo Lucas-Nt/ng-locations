@@ -31,37 +31,4 @@ $map-side-content-width: 380px;
 
 .side-content {
   min-width: $map-side-content-width;
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding: map-get($spacers, 2) map-get($spacers, 3);
-    align-items: center;
-
-    h2 {
-      margin-bottom: 0;
-    }
-  }
-
-  .content {
-    padding: 0 map-get($spacers, 3);
-    margin-top: map-get($spacers, 4);
-
-    .location-info-row {
-      display: flex;
-      flex-direction: column;
-      text-transform: uppercase;
-      gap: map-get($spacers, 1);
-      margin-bottom: map-get($spacers, 3);
-
-      .key {
-        color: $app-theme-color;
-        font-size: 12px;
-      }
-
-      .value {
-        font-size: 16px;
-      }
-    }
-  }
 }

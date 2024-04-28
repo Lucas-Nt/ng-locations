@@ -20,7 +20,9 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let location">{{ location.name }}</td>
+        <td mat-cell *matCellDef="let location">
+          {{ location.name | formatValue }}
+        </td>
       </ng-container>
       <!-- /Name Column -->
 
@@ -36,14 +38,18 @@
       <!-- Lat Column -->
       <ng-container matColumnDef="lat">
         <th mat-header-cell *matHeaderCellDef>lat</th>
-        <td mat-cell *matCellDef="let location">{{ location.lat }}</td>
+        <td mat-cell *matCellDef="let location">
+          {{ location.lat | formatValue }}
+        </td>
       </ng-container>
       <!-- /Lat Column -->
 
       <!-- Long Column -->
       <ng-container matColumnDef="lng">
         <th mat-header-cell *matHeaderCellDef>lng</th>
-        <td mat-cell *matCellDef="let location">{{ location.lng }}</td>
+        <td mat-cell *matCellDef="let location">
+          {{ location.lng | formatValue }}
+        </td>
       </ng-container>
       <!-- /Long Column -->
 
@@ -51,7 +57,11 @@
       <ng-container matColumnDef="creationDate">
         <th mat-header-cell *matHeaderCellDef>creationDate</th>
         <td mat-cell *matCellDef="let location">
-          {{ location.creationDate | formatValue }}
+          {{
+            location.creationDate
+              ? (location.creationDate | date : 'dd/MM/yyyy')
+              : '-'
+          }}
         </td>
       </ng-container>
       <!-- /Creation Date Column -->

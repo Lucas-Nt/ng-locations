@@ -3,43 +3,43 @@
     "coordinates": [48.87311534428107, 2.297906227858869],
     "name": "Paris, France",
     "address": "Av. des Champs-Élysées",
-    "creationDate": ""
+    "creationDate": "2018-10-12T16:54:23.376Z"
   },
   {
     "coordinates": [51.50148418749087, -0.14187927360469113],
     "name": "London, United Kingdom",
     "address": "Buckingham Palace",
-    "creationDate": ""
+    "creationDate": "2019-01-24T09:12:45.208Z"
   },
   {
     "coordinates": [41.890377894256034, 12.492305999001882],
     "name": "Rome, Italy",
     "address": "Colosseum",
-    "creationDate": ""
+    "creationDate": "2019-04-15T14:28:57.513Z"
   },
   {
     "coordinates": [41.404132877877366, 2.1767468747628342],
     "name": "Barcelona, Spain",
     "address": "Sagrada Familia",
-    "creationDate": ""
+    "creationDate": "2020-02-28T20:05:36.124Z"
   },
   {
     "coordinates": [37.971706083832, 23.72682388536518],
     "name": "Athens, Greece",
     "address": "Parthenon",
-    "creationDate": ""
+    "creationDate": "2018-12-09T11:40:18.795Z"
   },
   {
     "coordinates": [52.520106859517526, 13.377350046020114],
     "name": "Berlin, Germany",
     "address": "Brandenburg Gate",
-    "creationDate": ""
+    "creationDate": "2021-07-03T05:33:59.632Z"
   },
   {
     "coordinates": [52.37532289694743, 4.884491468932926],
     "name": "Amsterdam, Netherlands",
     "address": "Anne Frank House",
-    "creationDate": ""
+    "creationDate": "2019-11-20T18:09:11.407Z"
   },
   {
     "coordinates": [48.18595543300747, 16.313160964340327],
@@ -51,67 +51,67 @@
     "coordinates": [50.09123423706613, 14.401927633737513],
     "name": "Prague, Czech Republic",
     "address": "Prague Castle",
-    "creationDate": ""
+    "creationDate": "2021-03-19T15:48:42.775Z"
   },
   {
     "coordinates": [47.531123182432395, 19.20388910972105],
     "name": "Budapest, Hungary",
     "address": "Fisherman's Bastion",
-    "creationDate": ""
+    "creationDate": "2019-08-27T07:22:36.910Z"
   },
   {
     "coordinates": [52.24989577029007, 21.012137095723705],
     "name": "Warsaw, Poland",
     "address": "Old Town Market Square",
-    "creationDate": ""
+    "creationDate": "2022-02-14T13:56:18.035Z"
   },
   {
     "coordinates": [38.6917510806975, -9.215902217388694],
     "name": "Lisbon, Portugal",
     "address": "Belém Tower",
-    "creationDate": ""
+    "creationDate": "2020-09-01T22:40:49.174Z"
   },
   {
     "coordinates": [53.34299496363919, -6.266645197329378],
     "name": "Dublin, Ireland",
     "address": "Dublin Castle",
-    "creationDate": ""
+    "creationDate": "2022-05-30T08:17:53.847Z"
   },
   {
     "coordinates": [59.326903572696345, 18.072277297412832],
     "name": "Stockholm, Sweden",
     "address": "The Royal Palace",
-    "creationDate": ""
+    "creationDate": "2019-12-18T17:59:02.601Z"
   },
   {
     "coordinates": [59.90766666576421, 10.73756689559122],
     "name": "Oslo, Norway",
     "address": "Akershus Fortress",
-    "creationDate": ""
+    "creationDate": "2018-11-07T14:45:36.820Z"
   },
   {
     "coordinates": [55.67376870417787, 12.56858696819531],
     "name": "Copenhagen, Denmark",
     "address": "Tivoli Gardens",
-    "creationDate": ""
+    "creationDate": "2021-06-10T09:27:18.472Z"
   },
   {
     "coordinates": [47.374373883539455, 8.539656360551103],
     "name": "Zurich, Switzerland",
     "address": "District 1",
-    "creationDate": ""
+    "creationDate": "2023-04-27T20:34:01.115Z"
   },
   {
     "coordinates": [50.84702723138545, 4.353459667683682],
     "name": "Brussels, Belgium",
     "address": "Grand Place",
-    "creationDate": ""
+    "creationDate": "2020-07-12T12:03:57.826Z"
   },
   {
     "coordinates": [51.50082267422578, -0.12434645270583602],
     "name": "London, United Kingdom",
     "address": "Big Ben",
-    "creationDate": ""
+    "creationDate": "2019-10-30T06:28:45.693Z"
   },
   {
     "coordinates": [52.5196390320264, 13.403439874897657],
@@ -123,13 +123,13 @@
     "coordinates": [50.05426294700494, 19.935895052835004],
     "name": "Krakow, Poland",
     "address": "Wawel Castle",
-    "creationDate": ""
+    "creationDate": "2022-11-26T07:59:14.882Z"
   },
   {
     "coordinates": [45.43430170280674, 12.338482610031445],
     "name": "Venice, Italy",
     "address": "St. Mark's Square",
-    "creationDate": ""
+    "creationDate": "2021-08-03T18:40:30.391Z"
   },
   {
     "coordinates": [42.641579050122346, 18.11344480643985],
@@ -141,25 +141,25 @@
     "coordinates": [36.46059054779094, 25.373693068038662],
     "name": "Santorini, Greece",
     "address": "Castle of Oia",
-    "creationDate": ""
+    "creationDate": "2020-06-22T23:47:05.764Z"
   },
   {
     "coordinates": [64.1420930666275, -21.92587338513622],
     "name": "Reykjavik, Iceland",
     "address": "Hallgrímskirkja",
-    "creationDate": ""
+    "creationDate": "2022-08-19T10:59:30.281Z"
   },
   {
     "coordinates": [60.17047207342961, 24.952710355128534],
     "name": "Helsinki, Finland",
     "address": "Helsinki Cathedral",
-    "creationDate": ""
+    "creationDate": "2021-12-12T04:28:16.015Z"
   },
   {
     "coordinates": [41.141737598470655, -8.615725309068019],
     "name": "Porto, Portugal",
     "address": "Bolsa Palace",
-    "creationDate": ""
+    "creationDate": "2023-10-01T19:15:44.742Z"
   },
   {
     "coordinates": [43.69527017268733, 7.268436840870799],
@@ -171,12 +171,12 @@
     "coordinates": [48.13755777345672, 11.576081484771226],
     "name": "Munich, Germany",
     "address": "Marienplatz",
-    "creationDate": ""
+    "creationDate": "2022-06-29T08:12:37.040Z"
   },
   {
     "coordinates": [55.94871482230594, -3.199377060429846],
     "name": "Edinburgh, United Kingdom",
     "address": "Edinburgh Castle",
-    "creationDate": ""
+    "creationDate": "2018-12-25T23:17:59.186Z"
   }
 ]

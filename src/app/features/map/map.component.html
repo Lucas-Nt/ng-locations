@@ -3,35 +3,10 @@
   <mat-drawer-container class="drawer-container" autosize #drawer>
     <!-- Side content -->
     <mat-drawer #drawer class="side-content" mode="side">
-      <div class="header">
-        <h2>Location information</h2>
-
-        <!-- Close button -->
-        <button
-          type="button"
-          mat-mini-fab
-          color="primary"
-          (click)="closeDrawerAndTooltip()"
-        >
-          <mat-icon fontIcon="close" aria-label="Close side content" />
-        </button>
-        <!-- /Close button -->
-      </div>
-
-      <!-- Content -->
-      <div class="content">
-        <!-- Active location info -->
-        @for (prop of locations[activeLocationIndex!] | keyvalue: originalOrder;
-        track $index) {
-        <div *ngIf="prop.key !== 'id'" class="location-info-row">
-          <div class="key">{{ prop.key }}:</div>
-          <div class="value">{{ prop.value | formatValue }}</div>
-        </div>
-        }
-        <!-- Active location info -->
-      </div>
-
-      <!-- /Content -->
+      <app-map-side-content
+        [location]="locations[activeLocationIndex!]"
+        (closeButtonClick)="closeDrawerAndTooltip()"
+      />
     </mat-drawer>
     <!-- /Side content -->
 

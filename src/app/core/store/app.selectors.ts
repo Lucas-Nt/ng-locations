@@ -1,21 +1,24 @@
 import { Sort } from '@angular/material/sort';
 import { Selector } from '@ngxs/store';
+import { LocationViewModel } from '../../shared/models/location.model';
+import { compareFields } from '../../shared/utilities';
 import { AppState, AppStateModel } from './app.state';
 
 export class AppSelectors {
   @Selector([AppState])
-  static locations(state: AppStateModel) {
+  static locations(state: AppStateModel): LocationViewModel[] {
     return state.locations;
   }
 
   @Selector([AppState])
-  static locationsBasedOnOptions(state: AppStateModel) {
+  static locationsBasedOnOptions(state: AppStateModel): LocationViewModel[] {
     const { currentPage, pageSize, sortOptions } = state.listOptions;
     const startIndex = currentPage * pageSize;
     const endIndex = startIndex + pageSize;
+    const currentLocations = this.locations(state);
     const locations = sortOptions
-      ? getSortedLocations(state.locations, sortOptions)
-      : state.locations;
+      ? getSortedLocations(currentLocations, sortOptions)
+      : currentLocations;
 
     return locations.slice(startIndex, endIndex);
   }
@@ -23,34 +26,22 @@ export class AppSelectors {
 
 /**
  * Since the is no back-end service to sort the list of locations, this function
- * was created in order handle this based on sort options.
+ * was created to handle this functionality based on sort options.
  */
-function getSortedLocations(locations: any[], sortOptions: Sort) {
+function getSortedLocations(locations: LocationViewModel[], sortOptions: Sort) {
   const locationsToSort = [...locations];
   const { active, direction } = sortOptions;
+  const propertyToSort = active as keyof LocationViewModel;
 
   if (direction === 'desc') {
     locationsToSort
-      .sort((a, b) => compareFields(a[active], b[active]))
+      .sort((a, b) => compareFields(a[propertyToSort], b[propertyToSort]))
       .reverse();
   } else {
-    locationsToSort.sort((a, b) => compareFields(a[active], b[active]));
+    locationsToSort.sort((a, b) =>
+      compareFields(a[propertyToSort], b[propertyToSort])
+    );
   }
 
   return locationsToSort;
-}
-
-function compareFields(a: string, b: string): number {
-  const localeCompareResult = a.localeCompare(b, undefined, {
-    numeric: true,
-    sensitivity: 'base',
-  });
-
-  if (localeCompareResult < 0) {
-    return -1;
-  } else if (localeCompareResult > 0) {
-    return 1;
-  } else {
-    return 0;
-  }
 }

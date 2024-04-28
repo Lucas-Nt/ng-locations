@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,6 +20,7 @@ import {
   UpdateLocation,
 } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
+import { LocationViewModel } from '../../shared/models/location.model';
 import { FormatValuePipe } from '../../shared/pipes/format-value.pipe';
 import { LocationPopupFormComponent } from './location-popup-form/location-popup-form.component';
 
@@ -36,6 +37,7 @@ import { LocationPopupFormComponent } from './location-popup-form/location-popup
     MatButtonModule,
     MatIconModule,
     MatSortModule,
+    DatePipe,
     FormatValuePipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,20 +46,11 @@ export class ListComponent implements OnInit {
   sortOptions!: Sort;
   currentPage: number = 0;
   pageSize = 10;
-  pageSizes = [10, 25, 50, 100];
-  displayedColumns: string[] = [
-    'name',
-    'address',
-    'lat',
-    'lng',
-    'creationDate',
-    'actions',
-  ];
+  displayedColumns!: string[];
+  allLocations$!: Observable<LocationViewModel[]>;
+  locationsBasedOnOptions$!: Observable<LocationViewModel[]>;
 
-  // TODO: add types
-  allLocations$!: Observable<any[]>;
-  locationsBasedOnOptions$!: Observable<any[]>;
-
+  readonly pageSizes = [10, 25, 50, 100];
   private readonly store = inject(Store);
   private readonly dialog = inject(MatDialog);
 
@@ -67,6 +60,7 @@ export class ListComponent implements OnInit {
     this.locationsBasedOnOptions$ = this.store.select(
       AppSelectors.locationsBasedOnOptions
     );
+    this.setDisplayedColumns();
     this.setLocationListOptions();
   }
 
@@ -82,9 +76,9 @@ export class ListComponent implements OnInit {
     this.setLocationListOptions();
   }
 
-  openDialog(location: any = {}) {
+  openDialog(location?: LocationViewModel) {
     const dialogRef = this.dialog.open(LocationPopupFormComponent, {
-      data: location,
+      data: location ?? {},
       width: '40%',
     });
 
@@ -112,5 +106,16 @@ export class ListComponent implements OnInit {
         sortOptions: this.sortOptions,
       })
     );
+  }
+
+  private setDisplayedColumns() {
+    this.displayedColumns = [
+      'name',
+      'address',
+      'lat',
+      'lng',
+      'creationDate',
+      'actions',
+    ];
   }
 }

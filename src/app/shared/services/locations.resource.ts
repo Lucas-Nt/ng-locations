@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-
-/* These two include smaller sets of locations */
-// import locations from './locations_loukas.json';
-// import locations from './locations_.json';
-
-/* This includes set of 15000 locations */
-import locations from './locations_extended.json';
+import { Observable, of } from 'rxjs';
+import { LocationModel } from '../models/location.model';
+// import locations from './data/locations_small_set.json';
+import locations from './data/locations_large_set.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocationsResource {
-  // TODO: add types
-  getLocations() {
-    return of(locations);
+  getLocations(): Observable<LocationModel[]> {
+    return of(locations) as Observable<LocationModel[]>;
   }
 }

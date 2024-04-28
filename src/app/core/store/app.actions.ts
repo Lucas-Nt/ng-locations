@@ -1,3 +1,4 @@
+import { LocationViewModel } from '../../shared/models/location.model';
 import { ListOptionsModel } from './app.state';
 
 export class GetAllLocations {
@@ -11,10 +12,10 @@ export class SetLocationListOptions {
 
 export class UpdateLocation {
   static readonly type = '[App] Update Location';
-  constructor(public location: any) {}
+  constructor(public location: LocationViewModel) {}
 }
 
 export class CreateLocation {
   static readonly type = '[App] Create Location';
-  constructor(public location: any) {}
+  constructor(public location: LocationViewModel) {}
 }

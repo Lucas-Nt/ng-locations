@@ -1,4 +1,4 @@
-import { AsyncPipe, KeyValuePipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,15 +11,13 @@ import {
   MapInfoWindow,
   MapMarker,
 } from '@angular/google-maps';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GetAllLocations } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
-import { FormatValuePipe } from '../../shared/pipes/format-value.pipe';
 import { LocationsResource } from '../../shared/services/locations.resource';
+import { MapSideContentComponent } from './map-side-content/map-side-content.component';
 
 // TODO: move constants to service
 /* Cyprus coordinates */
@@ -35,13 +33,9 @@ const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
   imports: [
     GoogleMapsModule,
     MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
     AsyncPipe,
     NgFor,
-    NgIf,
-    KeyValuePipe,
-    FormatValuePipe,
+    MapSideContentComponent,
   ],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
@@ -219,7 +213,6 @@ export class MapComponent implements OnInit {
       },
     ],
   };
-  readonly originalOrder = (): number => 0;
   activeLocationIndex!: number | null;
   // TODO: add types
   locations$!: Observable<any[]>;
