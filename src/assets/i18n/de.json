@@ -1,4 +1,7 @@
 {
+  "home": {
+    "welcomeMessage": "Willkommen! Gehe zur Liste, um Standorte zu verwalten, oder erkunde sie in der Kartenansicht."
+  },
   "menuItems": {
     "list": "Liste",
     "map": "Karte"

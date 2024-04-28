@@ -1,4 +1,7 @@
 {
+  "home": {
+    "welcomeMessage": "Welcome! Navigate to list in order to manage locations or explore them in map view."
+  },
   "menuItems": {
     "list": "List",
     "map": "Map"

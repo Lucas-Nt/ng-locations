@@ -34,6 +34,7 @@ export class TopToolbarComponent {
   @Output() languageChanged = new EventEmitter<string>();
 
   languageSelected(lang: string) {
+    this.activeLanguage = lang;
     this.languageChanged.emit(lang);
   }
 }

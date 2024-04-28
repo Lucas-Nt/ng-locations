@@ -25,6 +25,5 @@ export class AppComponent {
 
   setActiveLanguage(lang: string) {
     this.translocoService.setActiveLang(lang);
-    this.activeLanguage = this.translocoService.getActiveLang();
   }
 }

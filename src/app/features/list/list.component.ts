@@ -83,8 +83,6 @@ export class ListComponent implements OnInit {
   }
 
   openDialog(location: any = {}) {
-    console.log('Edit location', location);
-
     const dialogRef = this.dialog.open(LocationPopupFormComponent, {
       data: location,
       width: '40%',

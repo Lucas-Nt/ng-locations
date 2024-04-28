@@ -1,12 +1,11 @@
-<div class="home-page-container">
+<div *transloco="let t" class="home-page-container">
   <div class="mb-7">
     <!-- Logo -->
     <div class="logo">
       <img src="assets/icons/marker.png" alt="marker" />
       <h1 class="text">Location<span class="faded-text">Xplorer</span></h1>
       <h2 class="mb-0">
-        Welcome! Navigate to list in order to manage locations or explore them
-        in map view.
+        {{ t('home.welcomeMessage') }}
       </h2>
     </div>
     <!-- /Logo -->

@@ -23,7 +23,7 @@ export class AppSelectors {
 
 /**
  * Since the is no back-end service to sort the list of locations, this function
- * was created in order to sort the locations based on the sort options.
+ * was created in order handle this based on sort options.
  */
 function getSortedLocations(locations: any[], sortOptions: Sort) {
   const locationsToSort = [...locations];
@@ -41,11 +41,16 @@ function getSortedLocations(locations: any[], sortOptions: Sort) {
 }
 
 function compareFields(a: string, b: string): number {
-  if (a < b) {
+  const localeCompareResult = a.localeCompare(b, undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  });
+
+  if (localeCompareResult < 0) {
     return -1;
-  }
-  if (a > b) {
+  } else if (localeCompareResult > 0) {
     return 1;
+  } else {
+    return 0;
   }
-  return 0;
 }
