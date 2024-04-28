@@ -1,6 +1,8 @@
 @use '../../../assets/common';
 
-$logo-color: #ffff;
+$top-toolbar-logo-color: #ffff;
+$top-toolbar-logo-font-size: 24px;
+$top-toolbar-logo-icon-width: 20px;
 $top-toolbar-navigation-buttons-margin-left: map-get(common.$spacers, 4);
 $top-toolbar-navigation-buttons-gap: map-get(common.$spacers, 1);
 
@@ -13,12 +15,12 @@ mat-toolbar {
     font-family: 'Righteous', sans-serif;
     font-weight: 400;
     font-style: normal;
-    color: $logo-color;
+    color: $top-toolbar-logo-color;
     text-decoration: none;
-    font-size: 24px;
+    font-size: $top-toolbar-logo-font-size;
 
     img {
-      width: 18px;
+      width: $top-toolbar-logo-icon-width;
       margin-right: map-get(common.$spacers, 1);
     }
 
