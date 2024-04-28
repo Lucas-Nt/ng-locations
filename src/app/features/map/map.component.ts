@@ -16,16 +16,9 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GetAllLocations } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
-import { LocationsResource } from '../../shared/services/locations.resource';
+import { LocationViewModel } from '../../shared/models/location.model';
 import { MapSideContentComponent } from './map-side-content/map-side-content.component';
-
-// TODO: move constants to service
-/* Cyprus coordinates */
-const CYPRUS_COORDINATES = {
-  lat: 35.1264,
-  lng: 33.4299,
-};
-const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
+import { MapService } from './map.service';
 
 @Component({
   selector: 'app-map',
@@ -39,193 +32,25 @@ const DEFAULT_MAP_CENTER = { ...CYPRUS_COORDINATES };
   ],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
+  providers: [MapService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
 
-  readonly clusterImagePath =
-    'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m';
-  // TODO: move options to service
-  readonly mapOptions: google.maps.MapOptions = {
-    center: { ...DEFAULT_MAP_CENTER },
-    maxZoom: 15,
-    minZoom: 3,
-    styles: [
-      {
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#f5f5f5',
-          },
-        ],
-      },
-      {
-        elementType: 'labels.icon',
-        stylers: [
-          {
-            visibility: 'off',
-          },
-        ],
-      },
-      {
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#616161',
-          },
-        ],
-      },
-      {
-        elementType: 'labels.text.stroke',
-        stylers: [
-          {
-            color: '#f5f5f5',
-          },
-        ],
-      },
-      {
-        featureType: 'administrative.land_parcel',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#bdbdbd',
-          },
-        ],
-      },
-      {
-        featureType: 'poi',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#eeeeee',
-          },
-        ],
-      },
-      {
-        featureType: 'poi',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#757575',
-          },
-        ],
-      },
-      {
-        featureType: 'poi.park',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#e5e5e5',
-          },
-        ],
-      },
-      {
-        featureType: 'poi.park',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#9e9e9e',
-          },
-        ],
-      },
-      {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#ffffff',
-          },
-        ],
-      },
-      {
-        featureType: 'road.arterial',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#757575',
-          },
-        ],
-      },
-      {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#dadada',
-          },
-        ],
-      },
-      {
-        featureType: 'road.highway',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#616161',
-          },
-        ],
-      },
-      {
-        featureType: 'road.local',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#9e9e9e',
-          },
-        ],
-      },
-      {
-        featureType: 'transit.line',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#e5e5e5',
-          },
-        ],
-      },
-      {
-        featureType: 'transit.station',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#eeeeee',
-          },
-        ],
-      },
-      {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [
-          {
-            color: '#c9c9c9',
-          },
-        ],
-      },
-      {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [
-          {
-            color: '#9e9e9e',
-          },
-        ],
-      },
-    ],
-  };
   activeLocationIndex!: number | null;
-  // TODO: add types
-  locations$!: Observable<any[]>;
-
-  readonly defaultMarkerIcon =
-    'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
-  readonly activeMarkerIcon =
-    'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-  readonly locationsResource = inject(LocationsResource);
+  locations$!: Observable<LocationViewModel[]>;
+  defaultMarkerIcon!: string;
+  activeMarkerIcon!: string;
+  clusterImagePath!: string;
+  mapOptions!: google.maps.MapOptions;
 
   private readonly store = inject(Store);
+  private readonly mapService = inject(MapService);
 
   ngOnInit(): void {
+    this.setupMapOptions();
     this.store.dispatch(new GetAllLocations());
     this.locations$ = this.store.select(AppSelectors.locations);
   }
@@ -240,5 +65,19 @@ export class MapComponent implements OnInit {
     this.activeLocationIndex = null;
     this.drawer.close();
     this.infoWindow?.close();
+  }
+
+  private setupMapOptions() {
+    const {
+      defaultMarkerIcon,
+      activeMarkerIcon,
+      clusterImagePath,
+      mapOptions,
+    } = this.mapService;
+
+    this.mapOptions = mapOptions;
+    this.defaultMarkerIcon = defaultMarkerIcon;
+    this.activeMarkerIcon = activeMarkerIcon;
+    this.clusterImagePath = clusterImagePath;
   }
 }
