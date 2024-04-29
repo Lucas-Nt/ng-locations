@@ -1,10 +1,7 @@
-@if (locations$ | async; as locations) {
 <div class="google-map-container">
   <mat-drawer-container class="drawer-container" autosize #drawer>
     <!-- Side content -->
-    <mat-drawer #drawer class="side-content" mode="side">
-      <app-map-side-content [location]="locations[activeLocationIndex!]" (closeButtonClick)="closeDrawerAndTooltip()" />
-    </mat-drawer>
+    <mat-drawer #drawer class="side-content" mode="side"> </mat-drawer>
     <!-- /Side content -->
 
     <!-- Main content -->
@@ -14,10 +11,10 @@
         <!-- Marker clusterer -->
         <map-marker-clusterer [imagePath]="clusterImagePath">
           <!-- Markers -->
-          @for (location of locations; track idx; let idx = $index) {
+          @for (marker of markers$ | async; track idx; let idx = $index) {
           <map-marker
             #marker="mapMarker"
-            [position]="{ lat: location.lat, lng: location.lng }"
+            [position]="{ lat: marker.lat, lng: marker.lng }"
             [icon]="idx === this.activeLocationIndex ? activeMarkerIcon : defaultMarkerIcon"
             (mapClick)="markerClicked(marker, idx)"
           />
@@ -25,16 +22,10 @@
           <!-- /Markers -->
         </map-marker-clusterer>
         <!-- /Marker clusterer -->
-
-        <!-- Marker tooltip -->
-        <map-info-window (closeclick)="closeDrawerAndTooltip()">
-          <span>{{ (activeLocationIndex | isNumber) ? locations[activeLocationIndex!].name : '' }}</span>
-        </map-info-window>
-        <!-- /Marker tooltip -->
       </google-map>
+
       <!-- /Map -->
     </div>
     <!-- /Main content -->
   </mat-drawer-container>
 </div>
-}

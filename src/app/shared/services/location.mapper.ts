@@ -6,8 +6,8 @@ export class LocationMapper {
       id: crypto.randomUUID(),
       name: location?.name,
       address: location?.address,
-      lat: location?.coordinates[0],
-      lng: location?.coordinates[1],
+      lat: parseFloat(`${location?.coordinates[0]}`),
+      lng: parseFloat(`${location?.coordinates[1]}`),
       creationDate: location?.creationDate,
     };
   }
