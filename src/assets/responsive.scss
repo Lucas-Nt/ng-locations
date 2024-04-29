@@ -1,5 +1,11 @@
 @use './common' as *;
 
+@media (max-width: 1200px) {
+  .mat-mdc-dialog-panel {
+    width: 90vw !important;
+  }
+}
+
 @media (max-width: 900px) {
   .home-logo {
     padding: 0 map-get($spacers, 4);
@@ -19,10 +25,6 @@
 @media (max-width: 599px) {
   .side-content {
     min-width: 270px !important;
-  }
-
-  .mat-mdc-dialog-panel {
-    width: 90vw !important;
   }
 
   .location-popup-form-container {
