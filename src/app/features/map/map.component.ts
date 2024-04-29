@@ -1,13 +1,12 @@
 import { AsyncPipe, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from '@angular/core';
-import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { GoogleMap, GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { GetAllLocations } from '../../core/store/app.actions';
-import { AppSelectors } from '../../core/store/app.selectors';
-import { LocationViewModel } from '../../shared/models/location.model';
+import { delay, of } from 'rxjs';
 import { IsNumberPipe } from '../../shared/pipes/is-number.pipe';
+import locationItems from '../../shared/services/data/locations_large_set.json';
 import { MapSideContentComponent } from './map-side-content/map-side-content.component';
 import { MapService } from './map.service';
 
@@ -23,22 +22,46 @@ import { MapService } from './map.service';
 export class MapComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  @ViewChild('map', { static: true }) map!: GoogleMap;
 
   activeLocationIndex!: number | null;
-  locations$!: Observable<LocationViewModel[]>;
+  locations: any[] = [];
   defaultMarkerIcon!: string;
   activeMarkerIcon!: string;
   clusterImagePath!: string;
   mapZoom!: number;
   mapOptions!: google.maps.MapOptions;
+  clusterMarkers: any;
 
   private readonly store = inject(Store);
   private readonly mapService = inject(MapService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const { AdvancedMarkerElement, PinElement } = (await google.maps.importLibrary('marker')) as google.maps.MarkerLibrary;
+
     this.setupMapOptions();
-    this.store.dispatch(new GetAllLocations());
-    this.locations$ = this.store.select(AppSelectors.locations);
+    // this.store.dispatch(new GetAllLocations());
+    this.clusterMarkers = of(locationItems)
+      .pipe(delay(1000))
+      .subscribe((locations) => {
+        const markers = locations.map((position, i) => {
+          const label = this.labels[i % this.labels.length];
+          const pinGlyph = new PinElement({
+            glyph: label,
+            glyphColor: 'white',
+          });
+          const marker = new AdvancedMarkerElement({
+            position: { lat: position.coordinates[0], lng: position.coordinates[1] },
+            content: pinGlyph.element,
+          });
+
+          return marker;
+        });
+
+        new MarkerClusterer({ markers, map: this.map.googleMap });
+      });
   }
 
   markerClicked(marker: MapMarker, index: number) {
