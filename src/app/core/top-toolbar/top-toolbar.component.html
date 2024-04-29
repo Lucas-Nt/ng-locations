@@ -1,6 +1,16 @@
 <ng-container *transloco="let t">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
+      <!-- Mobile menu -->
+      <button class="mobile-navigation-menu mr-1" mat-icon-button [matMenuTriggerFor]="navigationMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #navigationMenu="matMenu">
+        <button mat-menu-item routerLink="/map">{{ t('menuItems.map') }}</button>
+        <button mat-menu-item routerLink="/list">{{ t('menuItems.list') }}</button>
+      </mat-menu>
+      <!-- /Mobile menu -->
+
       <!-- Logo -->
       <a routerLink="/home" class="logo">
         <img src="assets/icons/marker.png" alt="marker" />
@@ -11,18 +21,13 @@
       <!-- Navigation items -->
       <div class="navigation-items">
         <!-- Map -->
-        <a mat-button routerLink="/map" routerLinkActive="router-link-active">{{
-          t('menuItems.map')
-        }}</a>
+        <a mat-button routerLink="/map" routerLinkActive="router-link-active">
+          {{ t('menuItems.map') }}
+        </a>
         <!-- /Map -->
 
         <!-- List -->
-        <a
-          mat-button
-          routerLink="/list"
-          routerLinkActive="router-link-active"
-          >{{ t('menuItems.list') }}</a
-        >
+        <a mat-button routerLink="/list" routerLinkActive="router-link-active">{{ t('menuItems.list') }}</a>
         <!-- /List -->
       </div>
       <!-- /Navigation items -->
@@ -35,7 +40,7 @@
         <mat-menu #menu="matMenu">
           @for (language of availableLanguages; track $index) {
           <button mat-menu-item (click)="languageSelected(language)">
-            {{ language }}
+            {{ t('languageSelector.' + language) }}
           </button>
           }
         </mat-menu>

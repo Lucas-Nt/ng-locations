@@ -9,6 +9,10 @@ $top-toolbar-navigation-buttons-gap: map-get(common.$spacers, 1);
 mat-toolbar {
   height: common.$top-toolbar-height;
 
+  .mobile-navigation-menu {
+    display: none;
+  }
+
   .logo {
     display: flex;
     align-items: center;

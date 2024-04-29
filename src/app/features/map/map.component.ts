@@ -1,16 +1,6 @@
 import { AsyncPipe, NgFor } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
-import {
-  GoogleMapsModule,
-  MapInfoWindow,
-  MapMarker,
-} from '@angular/google-maps';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -23,13 +13,7 @@ import { MapService } from './map.service';
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [
-    GoogleMapsModule,
-    MatSidenavModule,
-    AsyncPipe,
-    NgFor,
-    MapSideContentComponent,
-  ],
+  imports: [GoogleMapsModule, MatSidenavModule, AsyncPipe, NgFor, MapSideContentComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
   providers: [MapService],
@@ -44,6 +28,7 @@ export class MapComponent implements OnInit {
   defaultMarkerIcon!: string;
   activeMarkerIcon!: string;
   clusterImagePath!: string;
+  mapZoom!: number;
   mapOptions!: google.maps.MapOptions;
 
   private readonly store = inject(Store);
@@ -68,13 +53,9 @@ export class MapComponent implements OnInit {
   }
 
   private setupMapOptions() {
-    const {
-      defaultMarkerIcon,
-      activeMarkerIcon,
-      clusterImagePath,
-      mapOptions,
-    } = this.mapService;
+    const { mapZoom, defaultMarkerIcon, activeMarkerIcon, clusterImagePath, mapOptions } = this.mapService;
 
+    this.mapZoom = mapZoom;
     this.mapOptions = mapOptions;
     this.defaultMarkerIcon = defaultMarkerIcon;
     this.activeMarkerIcon = activeMarkerIcon;

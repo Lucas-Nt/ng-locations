@@ -5,5 +5,32 @@
   "menuItems": {
     "list": "Liste",
     "map": "Karte"
-  }
+  },
+  "languageSelector": {
+    "en": "Englisch",
+    "de": "Deutsch"
+  },
+  "list": {
+    "title": "Standorte Liste",
+    "addNew": "Neu hinzufügen",
+    "popUpForm": {
+      "addLocation": "Standort hinzufügen",
+      "editLocation": "Standort bearbeiten",
+      "addSubtitle": "Fülle die folgenden Felder aus",
+      "editSubtitle": "Passen Sie die Formularfelder bei Bedarf an"
+    }
+  },
+  "map": {
+    "markerInfo": {
+      "title": "Standortdetails"
+    }
+  },
+  "name": "Name",
+  "address": "Adresse",
+  "lat": "Breitengrad",
+  "lng": "Längengrad",
+  "creationDate": "Erstellungsdatum",
+  "fieldIsRequired": "Feld ist erforderlich",
+  "apply": "Anwenden",
+  "cancel": "Abbrechen"
 }

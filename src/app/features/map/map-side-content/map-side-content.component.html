@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
   <!-- Header -->
   <div class="header">
-    <h2>Location information</h2>
+    <h2>{{ t('map.markerInfo.title') }}</h2>
 
     <!-- Close button -->
     <button
@@ -21,35 +21,35 @@
   <div class="content">
     <!-- Name -->
     <div class="location-info-row">
-      <div class="label">Name</div>
+      <div class="label">{{ t('name') }}</div>
       <div class="value">{{ location.name | formatValue }}</div>
     </div>
     <!-- /Name  -->
 
     <!-- Address -->
     <div class="location-info-row">
-      <div class="label">Address</div>
+      <div class="label">{{ t('address') }}</div>
       <div class="value">{{ location.address | formatValue }}</div>
     </div>
     <!-- /Address  -->
 
     <!-- Lat -->
     <div class="location-info-row">
-      <div class="label">Lat</div>
+      <div class="label">{{ t('lat') }}</div>
       <div class="value">{{ location.lat | formatValue }}</div>
     </div>
     <!-- /Lat  -->
 
     <!-- Long -->
     <div class="location-info-row">
-      <div class="label">Long</div>
+      <div class="label">{{ t('lng') }}</div>
       <div class="value">{{ location.lng | formatValue }}</div>
     </div>
     <!-- /Long  -->
 
     <!-- Creation Date -->
     <div class="location-info-row">
-      <div class="label">Creation Date</div>
+      <div class="label">{{ t('creationDate') }}</div>
       <div class="value">
         {{
           location.creationDate

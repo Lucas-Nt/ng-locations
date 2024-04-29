@@ -16,16 +16,14 @@ export class AppSelectors {
     const startIndex = currentPage * pageSize;
     const endIndex = startIndex + pageSize;
     const currentLocations = this.locations(state);
-    const locations = sortOptions
-      ? getSortedLocations(currentLocations, sortOptions)
-      : currentLocations;
+    const locations = sortOptions ? getSortedLocations(currentLocations, sortOptions) : currentLocations;
 
     return locations.slice(startIndex, endIndex);
   }
 }
 
 /**
- * Since the is no back-end service to sort the list of locations, this function
+ * Since the is no back-end to sort the list of locations, this function
  * was created to handle this functionality based on sort options.
  */
 function getSortedLocations(locations: LocationViewModel[], sortOptions: Sort) {
@@ -34,13 +32,9 @@ function getSortedLocations(locations: LocationViewModel[], sortOptions: Sort) {
   const propertyToSort = active as keyof LocationViewModel;
 
   if (direction === 'desc') {
-    locationsToSort
-      .sort((a, b) => compareFields(a[propertyToSort], b[propertyToSort]))
-      .reverse();
+    locationsToSort.sort((a, b) => compareFields(a[propertyToSort], b[propertyToSort])).reverse();
   } else {
-    locationsToSort.sort((a, b) =>
-      compareFields(a[propertyToSort], b[propertyToSort])
-    );
+    locationsToSort.sort((a, b) => compareFields(a[propertyToSort], b[propertyToSort]));
   }
 
   return locationsToSort;

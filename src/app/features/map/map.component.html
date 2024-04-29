@@ -3,17 +3,14 @@
   <mat-drawer-container class="drawer-container" autosize #drawer>
     <!-- Side content -->
     <mat-drawer #drawer class="side-content" mode="side">
-      <app-map-side-content
-        [location]="locations[activeLocationIndex!]"
-        (closeButtonClick)="closeDrawerAndTooltip()"
-      />
+      <app-map-side-content [location]="locations[activeLocationIndex!]" (closeButtonClick)="closeDrawerAndTooltip()" />
     </mat-drawer>
     <!-- /Side content -->
 
     <!-- Main content -->
     <div class="main-content">
       <!-- Map -->
-      <google-map height="100%" width="100%" [zoom]="5" [options]="mapOptions">
+      <google-map height="100%" width="100%" [zoom]="mapZoom" [options]="mapOptions">
         <!-- Marker clusterer -->
         <map-marker-clusterer [imagePath]="clusterImagePath">
           <!-- Markers -->
@@ -21,11 +18,7 @@
           <map-marker
             #marker="mapMarker"
             [position]="{ lat: location.lat, lng: location.lng }"
-            [icon]="
-              idx === this.activeLocationIndex
-                ? activeMarkerIcon
-                : defaultMarkerIcon
-            "
+            [icon]="idx === this.activeLocationIndex ? activeMarkerIcon : defaultMarkerIcon"
             (mapClick)="markerClicked(marker, idx)"
           />
           }
@@ -35,7 +28,7 @@
 
         <!-- Marker tooltip -->
         <map-info-window (closeclick)="closeDrawerAndTooltip()">
-          <span>{{ locations[activeLocationIndex!]?.name }}</span>
+          <span>{{ activeLocationIndex ? locations[activeLocationIndex].name : '' }}</span>
         </map-info-window>
         <!-- /Marker tooltip -->
       </google-map>

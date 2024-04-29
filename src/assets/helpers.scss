@@ -51,3 +51,11 @@
     }
   }
 }
+
+tr {
+  &.table-row-hover {
+    &:hover {
+      background-color: lighten($app-theme-color, 50);
+    }
+  }
+}

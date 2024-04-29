@@ -1,51 +1,49 @@
-<div class="location-popup-form-container">
+<div *transloco="let t" class="location-popup-form-container">
   <div class="header">
-    <h1 class="mb-0">{{ isNewLocation ? 'Add Location' : 'Edit Location' }}</h1>
-    <span>{{
-      isNewLocation
-        ? 'Please fill in form fields'
-        : 'Adjust fields where necessary'
-    }}</span>
+    <h1 class="mb-0">
+      {{ isNewLocation ? t('list.popUpForm.addLocation') : t('list.popUpForm.editLocation') }}
+    </h1>
+    <span>{{ isNewLocation ? t('list.popUpForm.addSubtitle') : t('list.popUpForm.editSubtitle') }}</span>
   </div>
 
   <div class="content">
     <form [formGroup]="form">
       <!-- Name -->
       <mat-form-field>
-        <mat-label>Name</mat-label>
+        <mat-label>{{ t('name') }}</mat-label>
         <input type="test" matInput formControlName="name" />
         @if (form.get('name')?.hasError('required')) {
-        <mat-error>Field is required</mat-error>
+        <mat-error>{{ t('fieldIsRequired') }}</mat-error>
         }
       </mat-form-field>
       <!-- /Name -->
 
       <!-- Address -->
       <mat-form-field>
-        <mat-label>Address</mat-label>
+        <mat-label>{{ t('address') }}</mat-label>
         <input type="text" matInput formControlName="address" />
         @if (form.get('address')?.hasError('required')) {
-        <mat-error>Field is required</mat-error>
+        <mat-error>{{ t('fieldIsRequired') }}</mat-error>
         }
       </mat-form-field>
       <!-- /Address -->
 
       <!-- Lat -->
       <mat-form-field>
-        <mat-label>Latitude</mat-label>
+        <mat-label>{{ t('lat') }}</mat-label>
         <input type="number" matInput formControlName="lat" />
         @if (form.get('lat')?.hasError('required')) {
-        <mat-error>Field is required</mat-error>
+        <mat-error>{{ t('fieldIsRequired') }}</mat-error>
         }
       </mat-form-field>
       <!-- /Lat -->
 
       <!-- Longitude -->
       <mat-form-field>
-        <mat-label>Longitude</mat-label>
+        <mat-label>{{ t('lng') }}</mat-label>
         <input type="number" matInput formControlName="lng" />
         @if (form.get('lng')?.hasError('required')) {
-        <mat-error>Field is required</mat-error>
+        <mat-error>{{ t('fieldIsRequired') }}</mat-error>
         }
       </mat-form-field>
       <!-- /Name -->
@@ -53,7 +51,9 @@
   </div>
 
   <div class="footer">
-    <button mat-flat-button color="primary" (click)="apply()">Apply</button>
-    <button mat-flat-button (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="apply()">
+      {{ t('apply') }}
+    </button>
+    <button mat-flat-button (click)="cancel()">{{ t('cancel') }}</button>
   </div>
 </div>

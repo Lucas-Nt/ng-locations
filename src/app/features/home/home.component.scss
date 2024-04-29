@@ -15,7 +15,7 @@ $welcome-screen-help-text-color: rgb(158, 158, 158);
   flex-direction: column;
   gap: map-get(common.$spacers, 3);
 
-  .logo {
+  .home-logo {
     display: flex;
     align-items: center;
     flex-direction: column;

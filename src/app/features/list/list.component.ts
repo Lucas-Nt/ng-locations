@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { TranslocoModule } from '@ngneat/transloco';
 import { Store } from '@ngxs/store';
 import { Observable, filter, take, tap } from 'rxjs';
 import {
@@ -39,6 +40,7 @@ import { LocationPopupFormComponent } from './location-popup-form/location-popup
     MatSortModule,
     DatePipe,
     FormatValuePipe,
+    TranslocoModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

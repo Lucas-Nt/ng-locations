@@ -13,11 +13,17 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-location-popup-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule],
+  imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    TranslocoModule,
+  ],
   templateUrl: './location-popup-form.component.html',
   styleUrl: './location-popup-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

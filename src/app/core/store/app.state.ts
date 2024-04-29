@@ -5,12 +5,7 @@ import { iif, map, of, tap } from 'rxjs';
 import { LocationViewModel } from '../../shared/models/location.model';
 import { LocationMapper } from '../../shared/services/location.mapper';
 import { LocationsResource } from './../../shared/services/locations.resource';
-import {
-  CreateLocation,
-  GetAllLocations,
-  SetLocationListOptions,
-  UpdateLocation,
-} from './app.actions';
+import { CreateLocation, GetAllLocations, SetLocationListOptions, UpdateLocation } from './app.actions';
 
 export interface ListOptionsModel {
   currentPage: number;
@@ -44,15 +39,8 @@ export class AppState {
   getAllActions(ctx: StateContext<AppStateModel>) {
     const state = ctx.getState();
     const hasLocationsFromState = state.locations.length > 0;
-    const locationsFromService = this.locationsResource
-      .getLocations()
-      .pipe(map((response) => response.map(LocationMapper.toViewModel)));
-
-    const dataFormServiceOrState$ = iif(
-      () => hasLocationsFromState,
-      of(state.locations),
-      locationsFromService
-    );
+    const locationsFromService = this.locationsResource.getLocations().pipe(map((response) => response.map(LocationMapper.toViewModel)));
+    const dataFormServiceOrState$ = iif(() => hasLocationsFromState, of(state.locations), locationsFromService);
 
     return dataFormServiceOrState$.pipe(
       tap((data) => {
@@ -65,10 +53,7 @@ export class AppState {
   }
 
   @Action(SetLocationListOptions)
-  setLocationListOptions(
-    ctx: StateContext<AppStateModel>,
-    action: { options: ListOptionsModel }
-  ) {
+  setLocationListOptions(ctx: StateContext<AppStateModel>, action: { options: ListOptionsModel }) {
     const state = ctx.getState();
     const { currentPage, pageSize, sortOptions } = action.options;
 
@@ -83,10 +68,7 @@ export class AppState {
   }
 
   @Action(CreateLocation)
-  createLocation(
-    ctx: StateContext<AppStateModel>,
-    action: { location: LocationViewModel }
-  ) {
+  createLocation(ctx: StateContext<AppStateModel>, action: { location: LocationViewModel }) {
     const state = ctx.getState();
     const newLocation = {
       ...action.location,
@@ -101,18 +83,13 @@ export class AppState {
   }
 
   @Action(UpdateLocation)
-  updateLocation(
-    ctx: StateContext<AppStateModel>,
-    action: { location: LocationViewModel }
-  ) {
+  updateLocation(ctx: StateContext<AppStateModel>, action: { location: LocationViewModel }) {
     const state = ctx.getState();
     const updatedLocation = {
       ...action.location,
     };
 
-    const updatedLocations = state.locations.map((location) =>
-      location.id === updatedLocation.id ? updatedLocation : location
-    );
+    const updatedLocations = state.locations.map((location) => (location.id === updatedLocation.id ? updatedLocation : location));
 
     ctx.patchState({
       ...state,

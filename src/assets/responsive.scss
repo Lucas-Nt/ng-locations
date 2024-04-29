@@ -1,0 +1,59 @@
+@use './common' as *;
+
+@media (max-width: 900px) {
+  .home-logo {
+    padding: 0 map-get($spacers, 4);
+
+    img {
+      width: 60px !important;
+    }
+    .text {
+      font-size: 36px !important;
+    }
+    .secondary-text {
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 599px) {
+  .side-content {
+    min-width: 270px !important;
+  }
+
+  .mat-mdc-dialog-panel {
+    width: 90vw !important;
+  }
+
+  .location-popup-form-container {
+    .content {
+      form {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  }
+
+  .mobile-navigation-menu {
+    display: block !important;
+  }
+
+  .mat-mdc-paginator-range-label,
+  .mat-mdc-paginator-page-size-label,
+  .navigation-items {
+    display: none !important;
+  }
+
+  .mat-toolbar-row {
+    flex: 1;
+  }
+
+  mat-toolbar {
+    .logo {
+      font-size: 18px !important;
+
+      img {
+        width: 18px !important;
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
 export class MapService {
+  readonly mapZoom = 5;
   readonly defaultMapCenter = {
     lat: 44.0165,
     lng: 21.0059,
   };
   readonly defaultMarkerIcon = 'assets/icons/map-marker.png';
   readonly activeMarkerIcon = 'assets/icons/map-marker-active.png';
-  readonly clusterImagePath =
-    'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m';
+  readonly clusterImagePath = 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m';
 
   get mapOptions(): google.maps.MapOptions {
     return {

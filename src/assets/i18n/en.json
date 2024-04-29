@@ -5,5 +5,32 @@
   "menuItems": {
     "list": "List",
     "map": "Map"
-  }
+  },
+  "languageSelector": {
+    "en": "English",
+    "de": "Deutsch"
+  },
+  "list": {
+    "title": "Locations list",
+    "addNew": "Add new",
+    "popUpForm": {
+      "addLocation": "Add Location",
+      "editLocation": "Edit Location",
+      "addSubtitle": "Please fill in the form below",
+      "editSubtitle": "Adjust the form fields where needed"
+    }
+  },
+  "map": {
+    "markerInfo": {
+      "title": "Location details"
+    }
+  },
+  "name": "Name",
+  "address": "Address",
+  "lat": "Latitude",
+  "lng": "Longitude",
+  "creationDate": "Creation Date",
+  "fieldIsRequired": "Field is required",
+  "apply": "Apply",
+  "cancel": "Cancel"
 }
