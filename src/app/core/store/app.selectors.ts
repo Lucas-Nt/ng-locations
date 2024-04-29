@@ -26,7 +26,7 @@ export class AppSelectors {
  * Since the is no back-end to sort the list of locations, this function
  * was created to handle this functionality based on sort options.
  */
-function getSortedLocations(locations: LocationViewModel[], sortOptions: Sort) {
+function getSortedLocations(locations: LocationViewModel[], sortOptions: Sort): LocationViewModel[] {
   const locationsToSort = [...locations];
   const { active, direction } = sortOptions;
   const propertyToSort = active as keyof LocationViewModel;

@@ -1,10 +1,5 @@
 import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,12 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslocoModule } from '@ngneat/transloco';
 import { Store } from '@ngxs/store';
 import { Observable, filter, take, tap } from 'rxjs';
-import {
-  CreateLocation,
-  GetAllLocations,
-  SetLocationListOptions,
-  UpdateLocation,
-} from '../../core/store/app.actions';
+import { CreateLocation, GetAllLocations, SetLocationListOptions, UpdateLocation } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
 import { LocationViewModel } from '../../shared/models/location.model';
 import { FormatValuePipe } from '../../shared/pipes/format-value.pipe';
@@ -59,9 +49,7 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetAllLocations());
     this.allLocations$ = this.store.select(AppSelectors.locations);
-    this.locationsBasedOnOptions$ = this.store.select(
-      AppSelectors.locationsBasedOnOptions
-    );
+    this.locationsBasedOnOptions$ = this.store.select(AppSelectors.locationsBasedOnOptions);
     this.setDisplayedColumns();
     this.setLocationListOptions();
   }
@@ -89,35 +77,30 @@ export class ListComponent implements OnInit {
       .pipe(
         take(1),
         filter(Boolean),
-        tap((data) => {
-          if (data.id) {
-            this.store.dispatch(new UpdateLocation(data));
-          } else {
-            this.store.dispatch(new CreateLocation(data));
-          }
-        })
+        tap((data: LocationViewModel) => this.handleEditOrCreate(data))
       )
       .subscribe();
   }
 
   private setLocationListOptions() {
-    this.store.dispatch(
-      new SetLocationListOptions({
-        currentPage: this.currentPage,
-        pageSize: this.pageSize,
-        sortOptions: this.sortOptions,
-      })
-    );
+    const listOptions = {
+      currentPage: this.currentPage,
+      pageSize: this.pageSize,
+      sortOptions: this.sortOptions,
+    };
+
+    this.store.dispatch(new SetLocationListOptions(listOptions));
   }
 
   private setDisplayedColumns() {
-    this.displayedColumns = [
-      'name',
-      'address',
-      'lat',
-      'lng',
-      'creationDate',
-      'actions',
-    ];
+    this.displayedColumns = ['name', 'address', 'lat', 'lng', 'creationDate', 'actions'];
+  }
+
+  private handleEditOrCreate(data: LocationViewModel) {
+    if (data.id) {
+      this.store.dispatch(new UpdateLocation(data));
+    } else {
+      this.store.dispatch(new CreateLocation(data));
+    }
   }
 }

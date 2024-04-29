@@ -4,12 +4,7 @@
     <h2>{{ t('map.markerInfo.title') }}</h2>
 
     <!-- Close button -->
-    <button
-      type="button"
-      mat-mini-fab
-      color="primary"
-      (click)="closeButtonClick.emit()"
-    >
+    <button type="button" mat-mini-fab color="primary" (click)="closeButtonClick.emit()">
       <mat-icon fontIcon="close" aria-label="Close side content" />
     </button>
     <!-- /Close button -->
@@ -51,11 +46,7 @@
     <div class="location-info-row">
       <div class="label">{{ t('creationDate') }}</div>
       <div class="value">
-        {{
-          location.creationDate
-            ? (location.creationDate | date : 'dd/MM/yyyy')
-            : '-'
-        }}
+        {{ location.creationDate ? (location.creationDate | date : 'dd/MM/yyyy') : '-' }}
       </div>
     </div>
     <!-- /Creation Date  -->

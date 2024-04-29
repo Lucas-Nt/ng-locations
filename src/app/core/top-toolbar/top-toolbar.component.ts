@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,14 +9,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 @Component({
   selector: 'app-top-toolbar',
   standalone: true,
-  imports: [
-    MatToolbarModule,
-    MatButtonModule,
-    RouterModule,
-    MatIcon,
-    MatMenuModule,
-    TranslocoModule,
-  ],
+  imports: [MatToolbarModule, MatButtonModule, RouterModule, MatIcon, MatMenuModule, TranslocoModule],
   templateUrl: './top-toolbar.component.html',
   styleUrl: './top-toolbar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

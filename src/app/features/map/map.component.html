@@ -28,7 +28,7 @@
 
         <!-- Marker tooltip -->
         <map-info-window (closeclick)="closeDrawerAndTooltip()">
-          <span>{{ activeLocationIndex ? locations[activeLocationIndex].name : '' }}</span>
+          <span>{{ (activeLocationIndex | isNumber) ? locations[activeLocationIndex!].name : '' }}</span>
         </map-info-window>
         <!-- /Marker tooltip -->
       </google-map>

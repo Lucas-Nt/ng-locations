@@ -7,13 +7,14 @@ import { Observable } from 'rxjs';
 import { GetAllLocations } from '../../core/store/app.actions';
 import { AppSelectors } from '../../core/store/app.selectors';
 import { LocationViewModel } from '../../shared/models/location.model';
+import { IsNumberPipe } from '../../shared/pipes/is-number.pipe';
 import { MapSideContentComponent } from './map-side-content/map-side-content.component';
 import { MapService } from './map.service';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [GoogleMapsModule, MatSidenavModule, AsyncPipe, NgFor, MapSideContentComponent],
+  imports: [GoogleMapsModule, MatSidenavModule, AsyncPipe, IsNumberPipe, NgFor, MapSideContentComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
   providers: [MapService],
