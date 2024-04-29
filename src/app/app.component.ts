@@ -8,7 +8,6 @@ import { TopToolbarComponent } from './core/top-toolbar/top-toolbar.component';
   standalone: true,
   imports: [TopToolbarComponent, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'LocationXplorer';
@@ -19,8 +18,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.activeLanguage = this.translocoService.getActiveLang();
-    this.availableLanguages =
-      this.translocoService.getAvailableLangs() as string[];
+    this.availableLanguages = this.translocoService.getAvailableLangs() as string[];
   }
 
   setActiveLanguage(lang: string) {
